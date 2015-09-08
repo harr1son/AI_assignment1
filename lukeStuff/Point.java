@@ -1,3 +1,5 @@
+package assignment1;
+
 public class Point{
 	int x;
 	int y;
@@ -18,5 +20,7 @@ public class Point{
 	public boolean equals(Point that){
 		return (x == that.x) && (y == that.y);
  	}
-
+	public String toString(){
+		return "( "+x+" , "+y+" )";
+	}
 }

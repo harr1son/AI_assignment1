@@ -1,3 +1,5 @@
+package assignment1;
+
 public class MazeWithCheese{
 	int[][] state;
 	Point[] cheese;

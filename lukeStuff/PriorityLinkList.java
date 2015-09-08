@@ -1,9 +1,11 @@
+package assignment1;
+
 public class PriorityLinkList{
 	Point data;
-	LinkList next;
+	PriorityLinkList next;
 	int heuristic; //whatever heuristic value
 
-	public LinkList(Point data, LinkList next, int heuristic){
+	public PriorityLinkList(Point data, PriorityLinkList next, int heuristic){
 		this.data = data;
 		this.next = next;
 		this.heuristic = heuristic;

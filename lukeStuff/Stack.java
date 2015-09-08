@@ -1,19 +1,21 @@
+package assignment1;
+
 //insert proper implementation of a stack
 
 public class Stack{
 	LinkList top;
-	LinkList bottom;
+	//LinkList bottom;
 	public Stack(){
 		top = null;
-		bottom = null;
+		//bottom = null;
 	}
 	public Point pop(){
-		Point out = first.data;
-		first = first.next;
+		Point out = top.data;
+		top = top.next;
 		return out;
 	}
 	public void push(Point data){
-		last = new LinkList(data, last);
+		top = new LinkList(data, top);
 	}
 	
 }

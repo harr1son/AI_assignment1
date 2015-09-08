@@ -1,3 +1,5 @@
+package assignment1;
+
 public class LinkList{
 	Point data;
 	LinkList next;

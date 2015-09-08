@@ -1,3 +1,5 @@
+package assignment1;
+
 //insert proper implementation of priority queue 
 
 public class PriorityQueue{
@@ -20,10 +22,12 @@ public class PriorityQueue{
 		}
 
 		else{
-			nav = first;
-			while(nav.heuristic < heuristic){
+			PriorityLinkList nav = first;
+			while(nav.heuristic < heuristic && nav.next != null){
 				nav = nav.next;
 			}
+			PriorityLinkList tmp = nav.next;
+			nav.next = new PriorityLinkList(data, nav.next, heuristic);
 		}
 
 	}

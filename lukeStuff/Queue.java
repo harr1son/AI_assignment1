@@ -1,18 +1,6 @@
 package assignment1;
 
 public class Queue{
-	public static void main(String[] args){
-		Queue tester = new Queue();
-		Point a = new Point(1,1);
-		Point b = new Point(2,2);
-		Point c = new Point(3,3);
-		tester.enqueue(a);
-		tester.enqueue(b);
-		System.out.println(tester);
-		System.out.println(tester.dequeue());
-		System.out.println(tester.dequeue());
-	}
-	
 	LinkList first;
 	LinkList last;
 	public Queue(){

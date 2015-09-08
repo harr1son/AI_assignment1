@@ -1,57 +1,26 @@
 package assignment1;
 
-import java.io.FileNotFoundException;
-
-public class MazeWithCheese{
-	StateWithCheese startingState;
-	StateQueue frontier;
+public class AStar {
 	Point start;
+	Point goal;
 	char[][] maze;
+	String input;
 	
-	public static void main(String[] args) throws FileNotFoundException{
-		String input = Helper.processInput("smallcheese.txt");
-		MazeWithCheese m = new MazeWithCheese(input);
-		m.runOn();
+	public AStar(String input){
+		start = Helper.getStart(input);
+		goal = Helper.getGoal(input);
+		maze = Helper.toCharArr(input);
+		this.input = input;
 	}
-	
-	public MazeWithCheese(String inputText){
-		startingState = new StateWithCheese(inputText);
-		maze = Helper.toCharArr(inputText);
-		start = Helper.getStart(inputText);
-		frontier = new StateQueue();
-	}
-	
+
+	/**
+	 * Prints out the result of a A* Search on the maze
+	 */
 	public void runOn(){
-		StateWithCheese nav = startingState;
-		int counter = 0;
-		while( ! nav.isGoal() ) {
-			counter ++;
-			int x = nav.currentLocation.x;
-			int y = nav.currentLocation.y;
-			//START checking surrounding squares
-			if( maze[y][x - 1] != '%'){ //'l'
-				StateWithCheese newState = new StateWithCheese(nav, 'l');
-				frontier.insert(newState);
-			}
-			if( maze[y + 1][x] != '%'){//'u'
-				StateWithCheese newState = new StateWithCheese(nav, 'u');
-				frontier.insert(newState);
-			}
-			if( maze[y][x + 1] != '%'){//'r'
-				StateWithCheese newState = new StateWithCheese(nav, 'r');
-				frontier.insert(newState);
-			}
-			if( maze[y - 1][x] != '%'){//'d'
-				StateWithCheese newState = new StateWithCheese(nav, 'd');
-				frontier.insert(newState);
-			}
-			nav = frontier.dequeue();
-		}
-		System.out.println(counter);
-		nav.printPath();
-		
+		Point foundGoal = search(Helper.toBooleanArr(maze), start, goal);
+		Helper.printOutWithPath(Helper.toCharArr(input), foundGoal);
 	}
-	
+
 	public static Point search(boolean[][] maze, Point start, Point goal){
 		PriorityQueue frontier = new PriorityQueue();
 		Point nextExpand = start;
@@ -102,6 +71,7 @@ public class MazeWithCheese{
 		//TODO: include print statement here
 		//End print
 	}
-	
 
+	
 }
+

@@ -1,4 +1,3 @@
-package assignment1;
 
 public class AStar {
 	Point start;
@@ -76,7 +75,7 @@ public class AStar {
 
 		}
 		//By here, the nextExpand node, and parents, should be the path from 'S' to 'G'
-		//System.out.println("A* : " + nodesExpanded + " Nodes Expanded");
+		System.out.println("A* : " + nodesExpanded + " Nodes Expanded");
 		return nextExpand;
 		
 		//Printing out the path

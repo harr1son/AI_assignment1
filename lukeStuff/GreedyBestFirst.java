@@ -1,4 +1,3 @@
-package assignment1;
 
 public class GreedyBestFirst {
 	Point start;

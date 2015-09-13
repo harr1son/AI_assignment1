@@ -1,4 +1,3 @@
-package assignment1;
 
 public class DepthFirst {
 	Point start;

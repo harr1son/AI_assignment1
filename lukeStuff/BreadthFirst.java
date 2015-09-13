@@ -1,4 +1,3 @@
-package assignment1;
 
 public class BreadthFirst {
 	Point start;

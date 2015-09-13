@@ -1,4 +1,3 @@
-package assignment1;
 
 public class StateQueue {
 	StateLinkList first;

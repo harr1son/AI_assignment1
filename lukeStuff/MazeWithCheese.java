@@ -1,4 +1,3 @@
-package assignment1;
 
 import java.io.FileNotFoundException;
 import java.util.Hashtable;

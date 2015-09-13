@@ -1,4 +1,3 @@
-package assignment1;
 
 //insert proper implementation of priority queue 
 
@@ -15,19 +14,33 @@ public class PriorityQueue{
 		return out;
 	}
 	public void insert(Point data, int heuristic){
-
+	//int heuristic = data.fit;
 		if(first == null){
-			first = new PriorityLinkList(data, null, heuristic);
-			//last = first;
+			first = new PriorityLinkList(data, null, null, heuristic);
 		}
 
 		else{
-			PriorityLinkList nav = first;
-			while(nav.heuristic <= heuristic && nav.next != null){
-				//System.out.print("" + nav.heuristic + " ");
-				nav = nav.next;
+			if(heuristic < first.heuristic){
+				first = new PriorityLinkList(data, null, first, heuristic);
 			}
-			nav.next = new PriorityLinkList(data, nav.next, heuristic);
+			else{
+				PriorityLinkList nav = first;
+				
+			
+				while(heuristic >= nav.heuristic && nav.next != null){
+					nav = nav.next;
+				}
+				//System.out.println();
+				if (heuristic > nav.heuristic){
+					nav.next = new PriorityLinkList(data, nav, nav.next, heuristic);
+				}
+				else if(heuristic == nav.heuristic){
+					nav.next = new PriorityLinkList(data, nav, null, heuristic);
+				}
+				else{
+					nav = new PriorityLinkList(data, nav.prev, nav, heuristic);
+				}
+			}
 		}
 
 	}

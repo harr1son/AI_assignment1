@@ -1,4 +1,3 @@
-package assignment1;
 
 //insert proper implementation of a stack
 

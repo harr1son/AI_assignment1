@@ -5,7 +5,8 @@ public class Main{
 	
 	public static void main(String args[]) throws IOException {
 		//SMALL MAZE
-        String input = Helper.processInput("smallMaze.txt");
+	String mazename = "hardAstar.txt";
+        String input = Helper.processInput(mazename);
         
         BreadthFirst breadthFirstSmall = new BreadthFirst(input);
         breadthFirstSmall.runOn();
@@ -18,9 +19,11 @@ public class Main{
         
         AStar aStarSmall = new AStar(input);
         aStarSmall.runOn();
+	System.out.println("Run on " + mazename);
         
         //MEDIUM MAZE
-        input = Helper.processInput("mediumMaze.txt");
+	mazename = "mediumMaze.txt";
+        input = Helper.processInput(mazename);
 
         BreadthFirst breadthFirstMedium = new BreadthFirst(input);
         breadthFirstMedium.runOn();
@@ -33,9 +36,11 @@ public class Main{
         
         AStar aStarMedium = new AStar(input);
         aStarMedium.runOn();
+	System.out.println("Run on " + mazename);
         
         //BIG MAZE
-        input = Helper.processInput("bigMaze.txt");
+	mazename = "bigMaze.txt";
+        input = Helper.processInput(mazename);
 
         BreadthFirst breadthFirstBig = new BreadthFirst(input);
         breadthFirstBig.runOn();
@@ -48,6 +53,7 @@ public class Main{
         
         AStar aStarBig = new AStar(input);
         aStarBig.runOn();
+	System.out.println("Run on " + mazename);
         
        
     }

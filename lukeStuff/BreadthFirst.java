@@ -26,6 +26,7 @@ public class BreadthFirst {
 		Point nextExpand = start;
 		int x = nextExpand.x;
 		int y = nextExpand.y;
+		int nodesExpanded = 0;
 		while (! nextExpand.equals( goal ) ){
 			//Start adding points to the frontier
 			if ( maze[ x - 1 ] [ y ] ){
@@ -54,11 +55,13 @@ public class BreadthFirst {
 			maze[ x ][ y ] = false;
 
 			//Updating the next node to expand
+			nodesExpanded ++;
 			nextExpand = frontier.dequeue();
 			x = nextExpand.x;
 			y = nextExpand.y;
 
 		}
+		System.out.println("Breadth First Search : " + nodesExpanded + " Nodes Expanded");
 		//By here, the nextExpand node, and sequent parents, are a path from 'S' to 'G'
 		return nextExpand;
 	}

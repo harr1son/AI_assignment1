@@ -4,10 +4,10 @@ package assignment1;
 
 public class PriorityQueue{
 	PriorityLinkList first;
-	PriorityLinkList last;
+	//PriorityLinkList last;
 	public PriorityQueue(){
 		first = null;
-		last = null;
+		//last = null;
 	}
 	public Point dequeue(){
 		Point out = first.data;
@@ -18,12 +18,13 @@ public class PriorityQueue{
 
 		if(first == null){
 			first = new PriorityLinkList(data, null, heuristic);
-			last = first;
+			//last = first;
 		}
 
 		else{
 			PriorityLinkList nav = first;
-			while(nav.heuristic < heuristic && nav.next != null){
+			while(nav.heuristic <= heuristic && nav.next != null){
+				//System.out.print("" + nav.heuristic + " ");
 				nav = nav.next;
 			}
 			nav.next = new PriorityLinkList(data, nav.next, heuristic);

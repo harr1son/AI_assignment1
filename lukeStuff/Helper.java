@@ -56,7 +56,9 @@ public class Helper {
 	
 	public static boolean[][] toBooleanArr(char[][] charMaze){
 		
-		boolean[][] out = new boolean[charMaze[0].length][charMaze.length];
+		boolean[][] out = 
+				new boolean[charMaze[0].length]
+						[charMaze.length];
 		for(int x = 0; x < out.length; x++){
 			for(int y = 0; y < out[x].length; y++){
 				if (charMaze[y][x] != '%'){
@@ -131,6 +133,38 @@ public class Helper {
 			
 		}
 		return out;
+	}
+	
+	public static ArrayList<ArrayList<Point>> permute(ArrayList<Point> list) {
+		ArrayList<ArrayList<Point>> result = new ArrayList<ArrayList<Point>>();
+	 
+		//start from an empty list
+		result.add(new ArrayList<Point>());
+	 
+		for (int i = 0; i < list.size(); i++) {
+			//list of list in current iteration of the array num
+			ArrayList<ArrayList<Point>> current = new ArrayList<ArrayList<Point>>();
+	 
+			for (ArrayList<Point> l : result) {
+				// # of locations to insert is largest index + 1
+				for (int j = 0; j < l.size()+1; j++) {
+					// + add num[i] to different locations
+					l.add(j, list.get(i));
+	 
+					ArrayList<Point> temp = new ArrayList<Point>(l);
+					current.add(temp);
+	 
+					//System.out.println(temp);
+	 
+					// - remove num[i] add
+					l.remove(j);
+				}
+			}
+	 
+			result = new ArrayList<ArrayList<Point>>(current);
+		}
+	 
+		return result;
 	}
 	
 }

@@ -20,12 +20,23 @@ public class AStar {
 		Point foundGoal = search(Helper.toBooleanArr(maze), start, goal);
 		Helper.printOutWithPath(Helper.toCharArr(input), foundGoal);
 	}
+	
+	public static int pathLength(char[][] maze, Point start, Point goal){
+		Point foundGoal = search(Helper.toBooleanArr(maze), start, goal);
+		int out = 0;
+		while(foundGoal.parent != null){
+			out++;
+			foundGoal = foundGoal.parent;
+		}
+		return out;
+	}
 
 	public static Point search(boolean[][] maze, Point start, Point goal){
 		PriorityQueue frontier = new PriorityQueue();
 		Point nextExpand = start;
 		int x = nextExpand.x;
 		int y = nextExpand.y;
+		int nodesExpanded = 0;
 		while (! nextExpand.equals( goal ) ){
 			//Start adding points to the frontier
 			if ( maze[ x - 1 ] [ y ] ){
@@ -59,12 +70,13 @@ public class AStar {
 			
 			//Updating the next node to expand
 			nextExpand = frontier.dequeue();
+			nodesExpanded++;
 			x = nextExpand.x;
 			y = nextExpand.y;
 
 		}
 		//By here, the nextExpand node, and parents, should be the path from 'S' to 'G'
-
+		//System.out.println("A* : " + nodesExpanded + " Nodes Expanded");
 		return nextExpand;
 		
 		//Printing out the path

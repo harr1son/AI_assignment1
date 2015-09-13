@@ -26,6 +26,7 @@ public class DepthFirst {
 		Point nextExpand = start;
 		int x = nextExpand.x;
 		int y = nextExpand.y;
+		int nodesExpanded = 0;
 		while (! nextExpand.equals( goal ) ){
 			//Start adding points to the frontier
 			if ( maze[ x - 1 ] [ y ] ){
@@ -55,13 +56,15 @@ public class DepthFirst {
 
 			
 			//Updating the next node to expand
+			nodesExpanded++;
 			nextExpand = frontier.pop();
 			x = nextExpand.x;
 			y = nextExpand.y;
 
 		}
 		//By here, the nextExpand node, and parents, should be the path from 'S' to 'G'
-		
+
+		System.out.println("Depth First Search : " + nodesExpanded + " Nodes Expanded");
 		return nextExpand;
 		//Printing out the path
 		//TODO: include print statement here

@@ -1,6 +1,7 @@
 package assignment1;
 
 import java.io.FileNotFoundException;
+import java.util.Hashtable;
 
 public class MazeWithCheese{
 	StateWithCheese startingState;
@@ -9,9 +10,10 @@ public class MazeWithCheese{
 	char[][] maze;
 	
 	public static void main(String[] args) throws FileNotFoundException{
-		String input = Helper.processInput("smallcheese.txt");
+		String input = Helper.processInput("tinycheese.txt");
 		MazeWithCheese m = new MazeWithCheese(input);
 		m.runOn();
+		//Point nav = m.currentLocation;
 	}
 	
 	public MazeWithCheese(String inputText){
@@ -24,11 +26,19 @@ public class MazeWithCheese{
 	public void runOn(){
 		StateWithCheese nav = startingState;
 		int counter = 0;
+		Hashtable<StateWithCheese, Boolean> visitedStates = new Hashtable<StateWithCheese, Boolean>();
+		System.out.println("Number with Cheese: " + nav.containsCheese.size());
 		while( ! nav.isGoal() ) {
-			counter ++;
+			//System.out.println("\n-----");
+			//System.out.println();
+			System.out.println("Step: "+ (counter ++) + " Checking node on depth " + nav.depth );
+			System.out.println();
+			//System.out.println("Current Location: " + nav.currentLocation + '\n');
+			//System.out.println(nav.containsCheese.size());
 			int x = nav.currentLocation.x;
 			int y = nav.currentLocation.y;
 			//START checking surrounding squares
+			//System.out.println("In Checking");
 			if( maze[y][x - 1] != '%'){ //'l'
 				StateWithCheese newState = new StateWithCheese(nav, 'l');
 				frontier.insert(newState);
@@ -45,63 +55,48 @@ public class MazeWithCheese{
 				StateWithCheese newState = new StateWithCheese(nav, 'd');
 				frontier.insert(newState);
 			}
-			nav = frontier.dequeue();
-		}
-		System.out.println(counter);
-		nav.printPath();
-		
-	}
-	
-	public static Point search(boolean[][] maze, Point start, Point goal){
-		PriorityQueue frontier = new PriorityQueue();
-		Point nextExpand = start;
-		int x = nextExpand.x;
-		int y = nextExpand.y;
-		while (! nextExpand.equals( goal ) ){
-			//Start adding points to the frontier
-			if ( maze[ x - 1 ] [ y ] ){
-				frontier.insert (
-					new Point( x - 1 , y , nextExpand ), 
-					1 + nextExpand.distFromStart + Helper.manhattanDistance( x , y + 1 , goal.x , goal.y )
-					);
-			}
-			if ( maze[ x ] [ y - 1 ]  ){
-				frontier.insert (
-					new Point( x , y - 1 , nextExpand ), 
-					1 + nextExpand.distFromStart + Helper.manhattanDistance( x , y + 1 , goal.x , goal.y )
-					);
-			}
-			if ( maze[ x + 1 ] [ y ]  ){
-				frontier.insert (
-					new Point( x + 1 , y , nextExpand ), 
-					1 + nextExpand.distFromStart + Helper.manhattanDistance( x , y + 1 , goal.x , goal.y )
-					);
-			}
-			if ( maze[ x ] [ y + 1 ]  ){
-				frontier.insert (
-					new Point( x , y + 1 , nextExpand ), 
-					1 + nextExpand.distFromStart + Helper.manhattanDistance( x , y + 1 , goal.x , goal.y )
-					);
-			}
-			//End adding nodes to the frontier
-
-			//Disallowing returning to this location
-			maze[ x ][ y ] = false;
 			
-			//Updating the next node to expand
-			nextExpand = frontier.dequeue();
-			x = nextExpand.x;
-			y = nextExpand.y;
 
+			//System.out.println(frontier);
+			//System.out.println("-----\n");
+			//System.out.println(counter);
+			//System.out.println(frontier + "\n");
+			
+			visitedStates.put(nav, true);
+			
+			nav = frontier.dequeue();
+			while(visitedStates.get(nav) != null){
+				System.out.println("Oops not there baby");
+				throw new IndexOutOfBoundsException("Da fak");
+				//nav = frontier.dequeue();
+			}
+			//System.out.println("------");
+			//System.out.println(nav.depth + "\n");
 		}
-		//By here, the nextExpand node, and parents, should be the path from 'S' to 'G'
+		//System.out.println(counter);
+		//nav.printPath();
+		int cheeseNumber = 0;
 
-		return nextExpand;
+		int cheeseLetter = 0;
 		
-		//Printing out the path
-		//TODO: include print statement here
-		//End print
+		for(Point cheeseLocation : nav.eatenCheese){
+			if(cheeseNumber < 10){
+				maze[cheeseLocation.y][cheeseLocation.x] = (char)('0' + cheeseNumber);
+				cheeseNumber++;
+			}
+			else{
+				maze[cheeseLocation.y][cheeseLocation.x] = (char)('A' + cheeseLetter);	
+				cheeseLetter++;
+			}
+		}
+		
+		for(int i = 0; i < maze.length; i++){
+			System.out.println(maze[i]);
+		}
 	}
 	
+	public void printMazeWithPath(){
+		
+	}
 
 }

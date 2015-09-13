@@ -26,6 +26,7 @@ public class GreedyBestFirst {
 		Point nextExpand = start;
 		int x = nextExpand.x;
 		int y = nextExpand.y;
+		int nodesExpanded = 0;
 		while (! nextExpand.equals( goal ) ){
 			//Start adding points to the frontier
 			if ( maze[ x - 1 ] [ y ] ){
@@ -57,7 +58,7 @@ public class GreedyBestFirst {
 			//Disallowing returning to this location
 			maze[ x ][ y ] = false;
 
-			
+			nodesExpanded ++;
 			//Updating the next node to expand
 			nextExpand = frontier.dequeue();
 			x = nextExpand.x;
@@ -65,6 +66,7 @@ public class GreedyBestFirst {
 
 		}
 		//By here, the nextExpand node, and parents, should be the path from 'S' to 'G'
+		System.out.println("Greedy Best First : " + nodesExpanded + " Nodes Expanded");
 		return nextExpand;
 		//Printing out the path
 		//TODO: include print statement here
